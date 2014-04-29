@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/zero2one/drupal7-skeleton.svg)](https://travis-ci.org/zero2one/drupal7-skeleton)
+
 # Drupal 7 - Install Profile skeleton
 
 This is a skeleton to create Drupal 7 websites using an install profile.
