@@ -1,0 +1,15 @@
+<?php
+/**
+ * @file
+ * Module to demonstrate the Skeleton profile.
+ */
+
+/**
+ * Dummy function so we can use this in tests.
+ *
+ * @return string
+ *   Returns hard coded string "Hello world!".
+ */
+function skeleton_demo_hello_world() {
+  return 'Hello world!';
+}
