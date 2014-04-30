@@ -1,0 +1,303 @@
+#!/bin/bash
+
+################################################################################
+#
+# This script will setup a local copy of Drupal 7
+# based on the Installation Profile.
+#
+# Do not change the content of this file,
+# all configuration variables are in the config.sh file.
+#
+################################################################################
+
+
+# Define the root of the GIT repository.
+cd ${0%/*}
+ROOT=$(git rev-parse --show-toplevel)
+cd $ROOT
+
+# Load the colors.
+source $ROOT/scripts/helper-colors.sh
+
+# Load the helpers.
+source $ROOT/scripts/helper-functions.sh
+
+
+# Check if there is a skeleton folder.
+if [ ! -d $ROOT/skeleton ]; then
+  echo
+  echo -e  "${BGRED}                                                                 ${RESTORE}"
+  echo -e "${BGLRED}  Skelleton profile not found!                                   ${RESTORE}"
+  echo -e  "${BGRED}  This script works only if you have the skeleton profile        ${RESTORE}"
+  echo -e  "${BGRED}  folder.                                                        ${RESTORE}"
+  echo -e  "${BGRED}  Start with a fresh copy of the drupal7-skeleton project.       ${RESTORE}"
+  echo -e  "${BGRED}  See https://github.com/zero2one/drupal7-skeleton               ${RESTORE}"
+  echo -e  "${BGRED}                                                                 ${RESTORE}"
+  echo
+  exit 1
+fi
+
+
+# Ask confirmation before renaming the files & references to skeleton!
+echo
+echo -e  "${BGBLUE}                                                                 ${RESTORE}"
+echo -e "${BGLBLUE}  Rename skeleton profile to your own project.                   ${RESTORE}"
+echo -e  "${BGBLUE}                                                                 ${RESTORE}"
+echo -e  "${BGBLUE}  > This will rename the profile to the name you want.           ${RESTORE}"
+echo -e  "${BGBLUE}  > This will update all scrips so they support the new name.    ${RESTORE}"
+echo -e  "${BGBLUE}                                                                 ${RESTORE}"
+echo
+
+echo -e -n "${LRED}Are you sure?${RESTORE} (Y/n) "
+read -e -n 1 -r
+if [[ ! $REPLY =~ ^[Y]$ ]]; then
+  echo
+  echo -e  "${BGYELLOW}                                                                 ${RESTORE}"
+  echo -e "${BGLYELLOW}  Installation aborted!                                          ${RESTORE}"
+  echo -e  "${BGYELLOW}                                                                 ${RESTORE}"
+  echo
+  exit 0
+fi
+echo
+
+
+# Ask for the profile details.
+function input_profile_name {
+  echo -e -n "${LWHITE}Machine name of the new profile: ${RESTORE}"
+  read PROFILE_NAME
+}
+function input_profile_title {
+  echo -e -n "${LWHITE}Human name of the new profile: ${RESTORE}"
+  read PROFILE_TITLE
+}
+function input_profile_collect {
+  input_profile_name
+  while [[ ! "$PROFILE_NAME" =~ ^[a-z0-9_]{2,100}$ ]]; do
+    echo -e "${RED}Machine name name not valid:${RESTORE}"
+    echo -e "${RED}  - it should contain lowercase alphanumerique characters${RESTORE}"
+    echo -e "${RED}  - underscore is allowed${RESTORE}"
+    echo -e "${RED}and should be at least 2 characters long.${RESTORE}"
+    input_profile_name
+  done
+  echo
+
+  input_profile_title
+  while [[ ! "$PROFILE_TITLE" =~ ^.{2,100}$ ]]; do
+    echo -e "${RED}Human name name not valid:${RESTORE}"
+    echo -e "${RED}it should be at least 2 characters long.${RESTORE}"
+    input_profile_title
+  done
+  echo
+}
+input_profile_collect
+
+
+# Ask confirmation!
+INFO_PROFILE_NAME=$(fill_string_spaces "• Machine name : ${BGLBLUE}$PROFILE_NAME" 75)
+INFO_PROFILE_TITLE=$(fill_string_spaces "• Human name : ${BGLBLUE}$PROFILE_TITLE" 75)
+echo
+echo -e  "${BGBLUE}                                                                 ${RESTORE}"
+echo -e "${BGLBLUE}  Skeleton module will be renamed to:                            ${RESTORE}"
+echo -e  "${BGBLUE}                                                                 ${RESTORE}"
+echo -e  "${BGBLUE}  $INFO_PROFILE_NAME  ${RESTORE}"
+echo -e  "${BGBLUE}  $INFO_PROFILE_TITLE  ${RESTORE}"
+echo -e  "${BGBLUE}                                                                 ${RESTORE}"
+echo
+echo -e -n "${LRED}Are you sure?${RESTORE} (Y/n) "
+read -e -n 1 -r
+if [[ ! $REPLY =~ ^[Y]$ ]]; then
+  echo
+  echo -e  "${BGYELLOW}                                                                 ${RESTORE}"
+  echo -e "${BGLYELLOW}  Installation aborted!                                          ${RESTORE}"
+  echo -e  "${BGYELLOW}                                                                 ${RESTORE}"
+  echo
+  exit 0
+fi
+echo
+
+
+##
+# Make whole string uppercase.
+#
+# @param string
+##
+function string_uppercase {
+  echo $1 | tr 'a-z' 'A-Z'
+}
+
+##
+# Make first letter uppercase.
+#
+# @param string
+##
+function string_camelcase {
+  # First, get the first character.
+  firstchar=${1:0:1}
+  # Rest of the string.
+  restchars=${1:1}
+
+  # Make first uppercase.
+  firstchar=$(string_uppercase $firstchar)
+  echo "$firstchar$restchars"
+}
+
+##
+# Process files and replace skeleton by $PROFILE_NAME
+#
+# This will replace:
+# - skeleton by $PROFILE_NAME
+# - Skeleton by the camelcased $PROFILE_NAME string.
+# - SKELETON by the uppercased $PROFILE_NAME string.
+#
+# If a second parameter (new filename) is given, the file will be renamed to it.
+#
+# @param string
+#   file
+# @param string
+#   (optional) new file name
+##
+function process_skeleton_file {
+  FILENAME_SOURCE="$1"
+  FILENAME_TARGET="$2"
+  PROFILE_NAME_UPPERCASE=$(string_uppercase $PROFILE_NAME)
+  PROFILE_NAME_CAMELCASE=$(string_camelcase $PROFILE_NAME)
+
+  echo "  - Process $FILENAME_SOURCE"
+
+  if [ ! -f $FILENAME_SOURCE ]; then
+    echo -e "    ${YELLOW}[WARNING] File not found : $FILENAME_SOURCE${RESTORE}"
+    return 1
+  fi
+  sed -i '' -e "s/skeleton/$PROFILE_NAME/g" $1
+  sed -i '' -e "s/SKELETON/$PROFILE_NAME_UPPERCASE/g" $1
+  sed -i '' -e "s/Skeleton/$PROFILE_NAME_CAMELCASE/g" $1
+
+  if [ "$FILENAME_TARGET" ]; then
+    mv "$FILENAME_SOURCE" "$FILENAME_TARGET"
+    echo -e "    ${LBLACK}Renamed file to $FILENAME_TARGET${RESTORE}"
+  fi
+}
+
+
+##
+# Rename (move) a folder
+#
+# @param string
+#   Directory name
+# @param string
+#   New directory name
+##
+function process_skeleton_directory {
+  DIRECTORY_SOURCE="$1"
+  DIRECTORY_TARGET="$2"
+
+  echo "  - Process directory $FILENAME_SOURCE"
+
+  if [ ! -d $DIRECTORY_SOURCE ]; then
+    echo -e "    ${YELLOW}[WARNING] Directory not found : $DIRECTORY_SOURCE${RESTORE}"
+    return 1
+  fi
+
+  if [ "$DIRECTORY_TARGET" ]; then
+    mv "$DIRECTORY_SOURCE" "$DIRECTORY_TARGET"
+    echo -e "    ${LBLACK}Renamed directory to $DIRECTORY_TARGET${RESTORE}"
+  fi
+}
+
+
+# Process all files & directories
+echo
+echo -e "${BLUE}> Replace ${LBLUE}skeleton${BLUE} by ${LBLUE}$PROFILE_NAME${BLUE} in files & filenames...${RESTORE}"
+
+# Demo module
+process_skeleton_file \
+  "skeleton/modules/skeleton/skeleton_demo/csv/skeleton_content.csv" \
+  "skeleton/modules/skeleton/skeleton_demo/csv/$PROFILE_NAME_content.csv"
+process_skeleton_file \
+  "skeleton/modules/skeleton/skeleton_demo/includes/CreateEntity.inc"
+process_skeleton_file \
+  "skeleton/modules/skeleton/skeleton_demo/includes/CreateContent.inc"
+process_skeleton_file \
+  "skeleton/modules/skeleton/skeleton_demo/skeleton_demo.info" \
+  "skeleton/modules/skeleton/skeleton_demo/$PROFILE_NAME_demo.info"
+process_skeleton_file \
+  "skeleton/modules/skeleton/skeleton_demo/skeleton_demo.install" \
+  "skeleton/modules/skeleton/skeleton_demo/$PROFILE_NAME_demo.instal"
+process_skeleton_file \
+  "skeleton/modules/skeleton/skeleton_demo/skeleton_demo.module" \
+  "skeleton/modules/skeleton/skeleton_demo/$PROFILE_NAME_demo.module"
+process_skeleton_file \
+  "skeleton/modules/skeleton/skeleton_demo/skeleton_demo.test" \
+  "skeleton/modules/skeleton/skeleton_demo/$PROFILE_NAME_demo.test"
+
+# Demo profile
+process_skeleton_file \
+  "skeleton/skeleton.info" \
+  "skeleton/$PROFILE.info"
+process_skeleton_file \
+  "skeleton/skeleton.install" \
+  "skeleton/$PROFILE.install"
+process_skeleton_file \
+  "skeleton/skeleton.profile" \
+  "skeleton/$PROFILE.profile"
+
+# Behat
+process_skeleton_file \
+  "skeleton/behat/aliases.drushrc.php"
+process_skeleton_file \
+  "skeleton/behat/behat.local.yml.example"
+# !TODO: SPECIAL case, we need to paste the actual github path!
+process_skeleton_file \
+  "skeleton/behat/behat.local.yml.travis"
+process_skeleton_file \
+  "skeleton/behat/behat.yml"
+
+# .gitignore
+process_skeleton_file \
+  ".gitignore"
+
+# Travis-Ci
+process_skeleton_file \
+  ".travis.yml"
+
+# default.config
+process_skeleton_file \
+  "default.config.sh"
+
+# README
+process_skeleton_file \
+  "README.md"
+
+
+
+# Rename folders.
+echo
+echo -e "${BLUE}> Change ${LBLUE}skeleton${BLUE} folder name to ${LBLUE}$PROFILE_NAME${BLUE}...${RESTORE}"
+
+# Demo module
+process_skeleton_directory \
+  "skeleton/modules/skeleton/skeleton_demo" \
+  "skeleton/modules/skeleton/$PROFILE_NAME_demo"
+process_skeleton_directory \
+  "skeleton/modules/skeleton" \
+  "skeleton/modules/$PROFILE_NAME"
+
+# Skeleton profile
+process_skeleton_directory \
+  "skeleton" \
+  "$PROFILE_NAME"
+
+
+# End message.
+# If we managed to get to here: the installation was successful!
+TITLE=$(fill_string_spaces "${BGLGREEN}$PROFILE_NAME${BGGREEN} created" 89)
+echo
+echo -e  "${BGGREEN}                                                                 ${RESTORE}"
+echo -e "${BGLGREEN}  $TITLE  ${RESTORE}"
+echo -e  "${BGGREEN}  New profile has been created based on the skeleton profile.    ${RESTORE}"
+echo -e  "${BGGREEN}                                                                 ${RESTORE}"
+echo
+
+
+# DONE !
+exit
