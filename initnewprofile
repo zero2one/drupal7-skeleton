@@ -169,6 +169,7 @@ function process_skeleton_file {
     echo -e "    ${YELLOW}[WARNING] File not found : $FILENAME_SOURCE${RESTORE}"
     return 1
   fi
+  sed -i '' -e "s/Skeleton_Title/$NEW_PROFILE_TITLE/g" $1
   sed -i '' -e "s/skeleton/$NEW_PROFILE_NAME/g" $1
   sed -i '' -e "s/SKELETON/$NEW_PROFILE_NAME_UPPERCASE/g" $1
   sed -i '' -e "s/Skeleton/$NEW_PROFILE_NAME_CAMELCASE/g" $1
