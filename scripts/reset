@@ -24,6 +24,9 @@ source $ROOT/scripts/helper-functions.sh
 # Load the configuration.
 load_config_file
 
+# Check config
+check_config_file
+
 
 ##
 # Function to explain the script arguments.

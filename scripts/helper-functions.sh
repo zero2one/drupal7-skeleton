@@ -15,19 +15,52 @@ function load_config_file {
   # Check if the config file exists.
   if [ ! -f $ROOT/config.sh ]; then
     echo
-      echo -e  "${BGRED}                                                                 ${RESTORE}"
-      echo -e "${BGLRED}  ERROR: No configuration file found!                            ${RESTORE}"
-      echo -e  "${BGRED}  > Check if the ${BGLRED}config.sh${BGRED} file exists in the same               ${RESTORE}"
-      echo -e  "${BGRED}    directory of the ${BGLRED}install${BGRED} script.                             ${RESTORE}"
-      echo -e  "${BGRED}  > If not create one by creating a copy of ${BGLRED}default.config.sh${BGRED}.   ${RESTORE}"
-      echo -e  "${BGRED}                                                                 ${RESTORE}"
-      echo
-      exit 1
+    echo -e  "${BGRED}                                                                 ${RESTORE}"
+    echo -e "${BGLRED}  ERROR: No configuration file found!                            ${RESTORE}"
+    echo -e  "${BGRED}  > Check if the ${BGLRED}config.sh${BGRED} file exists in the same               ${RESTORE}"
+    echo -e  "${BGRED}    directory of the ${BGLRED}install${BGRED} script.                             ${RESTORE}"
+    echo -e  "${BGRED}  > If not create one by creating a copy of ${BGLRED}default.config.sh${BGRED}.   ${RESTORE}"
+    echo -e  "${BGRED}                                                                 ${RESTORE}"
+    echo
+    exit 1
   fi
 
   # Include the configuration file.
   source $ROOT/config.sh
 }
+
+
+##
+# Check the configuration from the config file.
+#
+# This checks:
+# - If the configured profile exists.
+##
+function check_config_file {
+  # Check if the $PROFILE_NAME is defined.
+  if [ ! $PROFILE_NAME ]; then
+    echo
+    echo -e  "${BGRED}                                                                 ${RESTORE}"
+    echo -e "${BGLRED}  ERROR: No profile in the config file!                          ${RESTORE}"
+    echo -e  "${BGRED}  > Check and add the profile name in the ${BGLRED}config.sh${BGRED} file.        ${RESTORE}"
+    echo -e  "${BGRED}                                                                 ${RESTORE}"
+    echo
+    exit 1
+  fi
+
+  # Check if there is a folder with the $PROFILE_NAME.
+  if [ ! -d $ROOT/$PROFILE_NAME ]; then
+    TITLE=$(fill_string_spaces "ERROR: No profile with the name $BASE_DOMAIN_URL" 61)
+    echo
+    echo -e  "${BGRED}                                                                 ${RESTORE}"
+    echo -e "${BGLRED}  $TITLE  ${RESTORE}"
+    echo -e  "${BGRED}  > Check the profile name in the ${BGLRED}config.sh${BGRED} file.                ${RESTORE}"
+    echo -e  "${BGRED}                                                                 ${RESTORE}"
+    echo
+    exit 1
+  fi
+}
+
 
 
 ##
