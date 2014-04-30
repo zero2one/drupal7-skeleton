@@ -18,10 +18,10 @@ function skeleton_demo_install() {
 function skeleton_demo_install_content_type() {
   $types = array(
     array(
-      'type' => 'skeleton_demo',
-      'name' => st('Skeleton demo content type'),
+      'type' => 'skeleton_content',
+      'name' => st('Skeleton demo type'),
       'base' => 'node_content',
-      'description' => st("Demo content type to demonstrate the Skeleton install profile."),
+      'description' => st('Demo content type to demonstrate the Skeleton install profile.'),
       'custom' => 1,
       'modified' => 1,
       'locked' => 0,

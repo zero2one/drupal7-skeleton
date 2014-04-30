@@ -134,7 +134,7 @@ enable_development_modules
 
 # Load demo content if required.
 if [ $DEMO_CONTENT ]; then
-  migrate_dummy_content
+  import_demo_content
 fi
 
 
