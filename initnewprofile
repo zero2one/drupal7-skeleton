@@ -223,7 +223,7 @@ process_skeleton_file \
   "skeleton/modules/skeleton/skeleton_demo/${NEW_PROFILE_NAME}_demo.info"
 process_skeleton_file \
   "skeleton/modules/skeleton/skeleton_demo/skeleton_demo.install" \
-  "skeleton/modules/skeleton/skeleton_demo/${NEW_PROFILE_NAME}_demo.instal"
+  "skeleton/modules/skeleton/skeleton_demo/${NEW_PROFILE_NAME}_demo.install"
 process_skeleton_file \
   "skeleton/modules/skeleton/skeleton_demo/skeleton_demo.module" \
   "skeleton/modules/skeleton/skeleton_demo/${NEW_PROFILE_NAME}_demo.module"
