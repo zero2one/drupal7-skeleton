@@ -50,7 +50,7 @@ function check_config_file {
 
   # Check if there is a folder with the $PROFILE_NAME.
   if [ ! -d $ROOT/$PROFILE_NAME ]; then
-    TITLE=$(fill_string_spaces "ERROR: No profile with the name $BASE_DOMAIN_URL" 61)
+    TITLE=$(fill_string_spaces "ERROR: No profile with the name $PROFILE_NAME" 61)
     echo
     echo -e  "${BGRED}                                                                 ${RESTORE}"
     echo -e "${BGLRED}  $TITLE  ${RESTORE}"
