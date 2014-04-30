@@ -71,6 +71,10 @@ function input_profile_title {
   echo -e -n "${LWHITE}Human name of the new profile: ${RESTORE}"
   read NEW_PROFILE_TITLE
 }
+function input_github_url {
+  echo -e -n "${LWHITE}GitHub URL for this profile${RESTORE} (leave empty if none): "
+  read NEW_GITHUB_URL
+}
 function input_profile_collect {
   input_profile_name
   while [[ ! "$NEW_PROFILE_NAME" =~ ^[a-z0-9_]{2,100}$ ]]; do
@@ -89,6 +93,14 @@ function input_profile_collect {
     input_profile_title
   done
   echo
+
+  input_github_url
+  while [[ "$NEW_GITHUB_URL" ]] && [[ ! "$NEW_GITHUB_URL" =~ ^https://github\.com/ ]]; do
+    echo -e "${RED}GitHub URL is not valid:${RESTORE}"
+    echo -e "${RED}it should start with https://github.com/${RESTORE}"
+    input_github_url
+  done
+  echo
 }
 input_profile_collect
 
@@ -102,6 +114,12 @@ echo -e "${BGLBLUE}  Skeleton module will be renamed to:                        
 echo -e  "${BGBLUE}                                                                 ${RESTORE}"
 echo -e  "${BGBLUE}  $INFO_PROFILE_NAME  ${RESTORE}"
 echo -e  "${BGBLUE}  $INFO_PROFILE_TITLE  ${RESTORE}"
+if [[ "$NEW_GITHUB_URL" ]]; then
+  INFO_GITHUB_URL=$(fill_string_spaces "• GitHub URL : ${BGLBLUE}$NEW_GITHUB_URL" 75)
+  echo -e  "${BGBLUE}  $INFO_GITHUB_URL  ${RESTORE}"
+else
+  echo -e  "${BGBLUE}  • No GitHub URL                                                ${RESTORE}"
+fi
 echo -e  "${BGBLUE}                                                                 ${RESTORE}"
 echo
 echo -e -n "${LRED}Are you sure?${RESTORE} (Y/n) "
@@ -162,6 +180,8 @@ function process_skeleton_file {
   FILENAME_TARGET="$2"
   NEW_PROFILE_NAME_UPPERCASE=$(string_uppercase $NEW_PROFILE_NAME)
   NEW_PROFILE_NAME_CAMELCASE=$(string_camelcase $NEW_PROFILE_NAME)
+  NEW_PROFILE_GITHUB_URL="${NEW_GITHUB_URL/https:\/\/github.com\//}"
+  NEW_PROFILE_GITHUB_URL=$(echo $NEW_PROFILE_GITHUB_URL | sed -e 's/\//\\\//g')
 
   echo "  - Process $FILENAME_SOURCE"
 
@@ -169,6 +189,7 @@ function process_skeleton_file {
     echo -e "    ${YELLOW}[WARNING] File not found : $FILENAME_SOURCE${RESTORE}"
     return 1
   fi
+  sed -i '' -e "s/zero2one\/drupal7-skeleton/$NEW_PROFILE_GITHUB_URL/g" $1
   sed -i '' -e "s/Skeleton_Title/$NEW_PROFILE_TITLE/g" $1
   sed -i '' -e "s/skeleton/$NEW_PROFILE_NAME/g" $1
   sed -i '' -e "s/SKELETON/$NEW_PROFILE_NAME_UPPERCASE/g" $1
