@@ -7,7 +7,7 @@
 /**
  * Class SkeletonDemoCreateSkeletonContent
  */
-class SkeletonDemoCreateSkeletonContent extends SkeletonDemoCreateEntity {
+class SkeletonDemoCreateContent extends SkeletonDemoCreateEntity {
   public $entityType = 'node';
   public $bundle = 'skeleton_content';
 
