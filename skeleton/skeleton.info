@@ -50,5 +50,4 @@ dependencies[] = views_bulk_operations
 ; skeleton modules ------------------------------------------------------------
 ; Add here skeleton modules that should be anebled when installing the
 ; skeleton profile.
-
-
+dependencies[] = skeleton_demo

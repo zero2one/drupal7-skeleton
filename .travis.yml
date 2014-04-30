@@ -65,6 +65,6 @@ script:
 
   # Add the tests here. Use the group name, classname or the file.
   # Example:
-  #- drush @skeleton test-run "<group name/classname/file>"
+  - drush @skeleton test-run "skeleton:demo"
 
   # End Run WebTests -----------------------------------------------------------

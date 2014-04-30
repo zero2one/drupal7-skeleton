@@ -1,0 +1,42 @@
+<?php
+/**
+ * @file
+ * Demonstration of a test within a profile module.
+ */
+
+/**
+ * Tests for the get info functionality.
+ */
+class SkeletonDemoTest extends DrupalWebTestCase {
+  /**
+   * Get the test info.
+   *
+   * @return array
+   *   The test information.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Skeleton - Demo',
+      'description' => 'Test the Skeleton Demo module.',
+      'group' => 'skeleton:demo',
+    );
+  }
+
+  /**
+   * Setup the test environment.
+   */
+  public function setUp() {
+    $modules = array('skeleton_demo');
+    parent::setUp($modules);
+  }
+
+  /**
+   * Test the get info functionality.
+   */
+  public function testHelloWorld() {
+    $expected = 'Hello world!';
+    $result = skeleton_demo_hello_world();
+
+    $this->assertEqual($expected, $result);
+  }
+}
