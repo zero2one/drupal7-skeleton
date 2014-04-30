@@ -7,3 +7,5 @@ core = "7.x"
 
 ; Test files
 files[] = skeleton_demo.test
+files[] = includes/CreateEntity.inc
+files[] = includes/CreateSkeletonContent.inc

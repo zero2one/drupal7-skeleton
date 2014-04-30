@@ -140,7 +140,7 @@ cd $ROOT
 echo
 
 if [ $DEMO_CONTENT ]; then
-  migrate_dummy_content
+  import_demo_content
 fi
 
 

@@ -4,6 +4,13 @@
  * Module to demonstrate the Skeleton profile.
  */
 
+
+/**
+ * Group name for the migration classes.
+ */
+define('SKELETON_DEMO_MIGRATION_GROUP', 'skeleton:demo');
+
+
 /**
  * Dummy function so we can use this in tests.
  *
@@ -12,4 +19,33 @@
  */
 function skeleton_demo_hello_world() {
   return 'Hello world!';
+}
+
+/**
+ * Implements hook_migrate_api().
+ */
+function skeleton_demo_migrate_api() {
+  $classes = array(
+    'SkeletonDemoCreateSkeletonContent',
+  );
+
+  $migrations = array();
+  foreach ($classes as $class_name) {
+    $migrations[$class_name] = array(
+      'class_name' => $class_name,
+      'group_name' => SKELETON_DEMO_MIGRATION_GROUP,
+    );
+  }
+
+  $api = array(
+    'api'        => 2,
+    'groups'     => array(
+      SKELETON_DEMO_MIGRATION_GROUP => array(
+        'title' => t('Demo content'),
+      ),
+    ),
+    'migrations' => $migrations,
+  );
+
+  return $api;
 }

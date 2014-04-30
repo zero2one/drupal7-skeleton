@@ -61,6 +61,8 @@ projects[views_bulk_operations][version] = "3.2"
 ; Modules
 projects[devel][subdir] = "development"
 projects[coder][subdir] = "development"
+projects[migrate][subdir] = "development"
+projects[migrate_extras][subdir] = "development"
 
 
 ; Libraries
