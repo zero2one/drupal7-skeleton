@@ -1,8 +1,8 @@
 [![Build Status](https://travis-ci.org/zero2one/drupal7-skeleton.svg)](https://travis-ci.org/zero2one/drupal7-skeleton)
 
-# Drupal 7 - Install Profile skeleton
+# Drupal 7 - Install Profile Skeleton_Title
 
-This is a skeleton to create Drupal 7 websites using an install profile.
+This is a starting base to create Drupal 7 websites using an install profile.
 
 
 ## Installation
@@ -61,7 +61,7 @@ You can Reinstall the platform any type by running the install script.
 5. Create an empty sites/default/files directory
 6. Makes a symlink within the /www/profiles directory to the /skeleton
    directory.
-7. Run the Drupal installer (Drush) using the skeleton profile.
+7. Run the Drupal installer (Drush) using the Skeleton_Title profile.
 
 #### Warning!
 

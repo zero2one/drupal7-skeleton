@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Module to demonstrate the Skeleton profile.
+ * Module to demonstrate the Skeleton_Title profile.
  */
 
 
@@ -26,7 +26,7 @@ function skeleton_demo_hello_world() {
  */
 function skeleton_demo_migrate_api() {
   $classes = array(
-    'SkeletonDemoCreateSkeletonContent',
+    'SkeletonDemoCreateContent',
   );
 
   $migrations = array();

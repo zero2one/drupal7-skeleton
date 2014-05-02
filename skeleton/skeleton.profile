@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Skeleton profile.
+ * Skeleton_Title profile.
  */
 
 /**

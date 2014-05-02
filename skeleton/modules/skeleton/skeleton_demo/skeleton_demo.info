@@ -1,5 +1,5 @@
-name = Skeleton demo module
-description = "Demonstrates the functionality of the Drupal 7 Skeleton"
+name = Skeleton_Title demo module
+description = "Demonstrates the functionality of the Skeleton_Title profile"
 package = Skeleton - Demo
 core = 7.x
 version = "7.x-1.x-dev"
@@ -8,4 +8,4 @@ core = "7.x"
 ; Test files
 files[] = skeleton_demo.test
 files[] = includes/CreateEntity.inc
-files[] = includes/CreateSkeletonContent.inc
+files[] = includes/CreateContent.inc

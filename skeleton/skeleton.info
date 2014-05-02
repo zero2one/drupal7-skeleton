@@ -1,5 +1,5 @@
-name = skeleton
-description = Skeleton platform installation profile
+name = Skeleton_Title
+description = Skeleton_Title platform installation profile
 version = 1.x-dev
 core = 7.x
 
