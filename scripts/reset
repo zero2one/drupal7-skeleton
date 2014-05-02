@@ -11,9 +11,10 @@
 
 
 # Define the root of the GIT repository.
-cd ${0%/*}
-ROOT=$(git rev-parse --show-toplevel)
+cd ${0%/*}/..
+ROOT=$(pwd)
 cd $ROOT
+
 
 # Load the colors.
 source $ROOT/scripts/helper-colors.sh
