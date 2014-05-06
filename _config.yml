@@ -1,0 +1,5 @@
+name: Drupal 7 - Skeleton
+markdown: redcarpet
+pygments: true
+relative_permalinks: false
+baseurl: /drupal7-skeleton

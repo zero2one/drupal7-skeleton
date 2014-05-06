@@ -1,0 +1,13 @@
+- title: Getting Started
+  docs:
+  - installation
+  - usage
+  - structure
+  - configuration
+
+- title: Create Profile
+  docs:
+  - create-profile
+  - continuous-integration
+  - demo-content
+

@@ -1,0 +1,26 @@
+---
+layout: default
+---
+
+<div id="page-header-container"><div class="container">
+    <h1>{{ page.title }}</h1>
+</div></div>
+
+<div class="container" id="content">
+    <div class="row">
+        <div class="col-md-9" id="col-main">
+            {{ content }}
+
+            {% include docs_nav.html %}
+        </div>
+
+        <div class="col-md-3" id="col-nav">
+            {% include docs_contents.html %}
+        </div>
+    </div>
+
+
+
+
+</div><!-- /container -->
+
