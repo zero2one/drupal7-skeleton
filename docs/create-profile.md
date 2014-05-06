@@ -2,8 +2,8 @@
 layout: docs
 title: Create Profile
 prev_section: configuration
-next_section: continuous-integration
+next_section: custom-modules
 permalink: /docs/create-profile/
 ---
 
-Test 123
+Create profile

@@ -42,14 +42,30 @@ body {
 #content {
     padding: 2em 0;
 }
+    #content h1 {
+        border-bottom: 1px solid #b2bb1f;
+        color: #727074;
+        margin: 40px 0 20px;
+        padding-bottom: 9px;
+    }
+    #col-main h1:first-child {
+        margin-top: 0;
+    }
 
+aside h4 {
+    color: #727074;
+    margin-top: 30px;
+}
+aside h4:first-child {
+    margin-top: 10px;
+}
 
 /* Sticky footer */
 footer {
-    width: 100%;
-    height: 60px;
     background-color: #f2f2f2;
+    height: 60px;
     padding: 15px 0;
+    width: 100%;
 }
 
 
@@ -58,10 +74,6 @@ footer {
 
 /* Desktop version */
 @media (min-width: 992px) {
-    body {
-        padding-bottom: 80px;
-    }
-
     #col-main {
         padding-right: 15px;
     }
@@ -71,10 +83,5 @@ footer {
 
     .container {
         width: 970px;
-    }
-
-    footer {
-        position: fixed;
-        bottom: 0;
     }
 }

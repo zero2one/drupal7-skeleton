@@ -1,9 +1,8 @@
 ---
 layout: docs
 title: Continuous Integration
-prev_section: create-profile
-next_section: demo-content
+prev_section: automatic-testing
 permalink: /docs/continuous-integration/
 ---
 
-Test 123
+Continuous Integration

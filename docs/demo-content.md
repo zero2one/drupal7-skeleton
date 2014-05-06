@@ -1,8 +1,9 @@
 ---
 layout: docs
 title: Demo content
-prev_section: continuous-integration
+prev_section: custom-modules
+next_section: automatic-testing
 permalink: /docs/demo-content/
 ---
 
-Test 123
+Demo content
