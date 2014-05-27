@@ -331,3 +331,26 @@ function symlink_externals {
   done
   echo
 }
+
+##
+# Check if there is an post script and run it.
+##
+function run_post_script {
+  if [ ! "$1" ]; then
+    return 1
+  fi
+
+  # Define post script name.
+  POST_FUNCT_NAME="post_$1"
+
+  # Check if the function is declared.
+  declare -Ff "$POST_FUNCT_NAME" >/dev/null;
+  if [ $? -eq 1 ]; then
+    return 1
+  fi
+
+  # Run the post script.
+  echo -e "${LBLUE}> Run $POST_FUNCT_NAME script.${RESTORE}"
+  $POST_FUNCT_NAME
+  echo
+}
