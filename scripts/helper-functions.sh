@@ -333,7 +333,10 @@ function symlink_externals {
 }
 
 ##
-# Check if there is an post script and run it.
+# Check if there is a post script and run it.
+#
+# @param string $1
+#   The kind of post script to run.
 ##
 function run_post_script {
   if [ ! "$1" ]; then
