@@ -1,0 +1,17 @@
+- title: Getting Started
+  docs:
+  - home
+  - quick-start
+  - requirements
+  - installation
+  - upgrade
+  - structure
+  - configuration
+
+- title: Create Profile
+  docs:
+  - create-profile
+  - custom-modules
+  - demo-content
+  - automatic-testing
+  - continuous-integration

@@ -1,0 +1,87 @@
+/* Support header menu */
+body {
+    margin-top: 50px;
+}
+
+/* Brand */
+.navbar-inverse .navbar-brand {
+    color: #fff;
+    font-weight: bold;
+}
+
+/* Navigation */
+.navbar-inverse, .navbar-fixed-top {
+    background-color: #727074;
+    border: none;
+}
+.navbar-inverse .navbar-nav>li>a {
+    color: #000;
+}
+.navbar-inverse .navbar-nav>.active>a,
+.navbar-inverse .navbar-nav>.active>a:hover {
+    background-color: #b2bb1f;
+    color: #000;
+}
+
+/* Page header */
+#page-header-container {
+    background-color: #b2bb1f;
+}
+#page-header-container h1 {
+    border-bottom: none;
+    margin: 30px 0 20px;
+}
+
+/* Columns */
+#col-main,
+#col-nav {
+    padding: 0 30px;
+}
+
+/* Make sure content does not stick to the menu */
+#content {
+    padding: 2em 0;
+}
+    #content h1 {
+        border-bottom: 1px solid #b2bb1f;
+        color: #727074;
+        margin: 40px 0 20px;
+        padding-bottom: 9px;
+    }
+    #col-main h1:first-child {
+        margin-top: 0;
+    }
+
+aside h4 {
+    color: #727074;
+    margin-top: 30px;
+}
+aside h4:first-child {
+    margin-top: 10px;
+}
+
+/* Sticky footer */
+footer {
+    background-color: #f2f2f2;
+    height: 60px;
+    padding: 15px 0;
+    width: 100%;
+}
+
+
+
+
+
+/* Desktop version */
+@media (min-width: 992px) {
+    #col-main {
+        padding-right: 15px;
+    }
+    #col-nav {
+        padding-left: 15px;
+    }
+
+    .container {
+        width: 970px;
+    }
+}
