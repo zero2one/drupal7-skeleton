@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: File Structure
-prev_section: usage
+prev_section: upgrade
 next_section: configuration
 permalink: /docs/structure/
 ---

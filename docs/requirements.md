@@ -1,6 +1,7 @@
 ---
 layout: docs
 title: Requirements
+prev_section: quick-start
 next_section: installation
 permalink: /docs/requirements/
 ---
