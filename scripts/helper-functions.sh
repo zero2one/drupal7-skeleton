@@ -234,7 +234,8 @@ function import_demo_content {
   MIGRATE_EXTRAS=$(drush pm-list --pipe --type=module | grep "^migrate_extras$")
   if [ $MIGRATE_UI ] && [ $MIGRATE_EXTRAS ]; then
     drush en -y migrate migrate_ui migrate_extras
-    drush mi --update --all
+    # Migrate as user ID 1, to make sure no access check is done.
+    drush mi --all --user=1
   else
     echo -e  "${BGYELLOW}                                                                 ${RESTORE}"
     echo -e "${BGLYELLOW}  Migrate and or Migrate Extras module(s) are not available!     ${RESTORE}"
