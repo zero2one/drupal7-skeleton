@@ -5,7 +5,7 @@
 # This script will setup a local copy of Drupal 7
 # based on the Installation Profile.
 #
-# Do not change the content of this file, 
+# Do not change the content of this file,
 # all configuration variables are in the config.sh file.
 #
 ################################################################################
@@ -147,6 +147,9 @@ enable_development_modules
 if [ $DEMO_CONTENT ]; then
   import_demo_content
 fi
+
+# Install Behat.
+install_behat
 
 # Run post script (if any).
 run_post_script "install"
