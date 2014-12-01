@@ -249,6 +249,19 @@ function import_demo_content {
   echo
 }
 
+##
+# Install Behat using composer.
+##
+function install_behat {
+  echo -e "${LBLUE}> Install Behat${RESTORE}"
+  cd $ROOT/$PROFILE_NAME/behat
+
+  curl -sS https://getcomposer.org/installer | php
+  php composer.phar install
+
+  cd $ROOT
+  echo
+}
 
 ##
 # Fill string with spaces until required length.

@@ -4,7 +4,7 @@
 #
 # This script will reset a local copy of Drupal 7 based on the Install Profile.
 #
-# Do not change the content of this file, 
+# Do not change the content of this file,
 # all configuration variables are in the config.sh file.
 #
 ################################################################################
@@ -47,6 +47,7 @@ function arguments_usage {
   echo -e  "${BGCYAN}  OPTIONS:                                                       ${RESTORE}"
   echo -e  "${BGCYAN}    -h   Show this message                                       ${RESTORE}"
   echo -e  "${BGCYAN}    -d   Load demo content after the reset                       ${RESTORE}"
+  echo -e  "${BGCYAN}    -t   Install Behat testing framework                         ${RESTORE}"
   echo -e  "${BGCYAN}    -l   Open a new tab in your default browser and login to     ${RESTORE}"
   echo -e  "${BGCYAN}         your project as the Administrator.                      ${RESTORE}"
   echo -e  "${BGCYAN}    -y   Answer automatically yes to the confirmation questions. ${RESTORE}"
@@ -68,6 +69,9 @@ do
       ;;
     l)
       AUTO_LOGIN=1
+      ;;
+    t)
+      BEHAT=1
       ;;
     y)
       UNATTENDED=1
@@ -182,6 +186,10 @@ echo -e  "${BGGREEN}  $LINK_INFO  ${RESTORE}"
 echo -e  "${BGGREEN}                                                                 ${RESTORE}"
 echo
 
+# Behat?
+if [ $BEHAT ]; then
+  install_behat
+fi
 
 # Auto Login?
 if [ $AUTO_LOGIN ]; then

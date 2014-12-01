@@ -5,7 +5,7 @@
 # This script will setup a local copy of Drupal 7
 # based on the Installation Profile.
 #
-# Do not change the content of this file, 
+# Do not change the content of this file,
 # all configuration variables are in the config.sh file.
 #
 ################################################################################
@@ -47,6 +47,7 @@ function arguments_usage {
   echo -e  "${BGCYAN}  OPTIONS:                                                       ${RESTORE}"
   echo -e  "${BGCYAN}    -h   Show this message.                                      ${RESTORE}"
   echo -e  "${BGCYAN}    -d   Load demo content after the installation.               ${RESTORE}"
+  echo -e  "${BGCYAN}    -t   Install Behat testing framework                         ${RESTORE}"
   echo -e  "${BGCYAN}    -l   Open a new tab in your default browser and login to     ${RESTORE}"
   echo -e  "${BGCYAN}         your project as the Administrator.                      ${RESTORE}"
   echo -e  "${BGCYAN}    -y   Answer automatically yes to the confirmation questions.  ${RESTORE}"
@@ -69,6 +70,9 @@ do
       ;;
     l)
       AUTO_LOGIN=1
+      ;;
+    t)
+      BEHAT=1
       ;;
     y)
       UNATTENDED=1
@@ -146,6 +150,10 @@ enable_development_modules
 # Load demo content if required.
 if [ $DEMO_CONTENT ]; then
   import_demo_content
+fi
+
+if [ $BEHAT ]; then
+  install_behat
 fi
 
 # Run post script (if any).

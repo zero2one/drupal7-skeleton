@@ -53,10 +53,10 @@ skeleton/themes/contrib
 skeleton/libraries
 
 # Behat
-skeleton/behat/vendor/
+behat/vendor/
 behat.local.yml
-skeleton/behat/bin
-skeleton/behat/composer.phar
+behat/bin
+behat/composer.phar
 
 # Temporay "build" files
 www
