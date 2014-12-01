@@ -1,0 +1,7 @@
+default:
+  extensions:
+    Behat\MinkExtension:
+      base_url: [Set your base URL, e.g. "http://localhost/skeleton/www"]
+    Drupal\DrupalExtension:
+      drupal:
+        drupal_root: [Set your Drupal root, e.g. "/var/www/skeleton/www"]
