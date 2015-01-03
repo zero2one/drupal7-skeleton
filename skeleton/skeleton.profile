@@ -80,8 +80,8 @@ function skeleton_setup_blocks() {
  * Task callback; Rebuild permissions (node access).
  *
  * Setting up the platform triggers the need to rebuild the permissions.
- * We do this here so no manual rebuild is necessary when we finished the
- * installation.
+ * We do this here so no manual rebuild is not necessary when we finish
+ * the installation.
  */
 function skeleton_setup_rebuild_permissions() {
   node_access_rebuild();
