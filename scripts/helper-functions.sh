@@ -25,6 +25,7 @@ function load_config_file {
     exit 1
   fi
 
+
   # Include the configuration file.
   source $ROOT/config.sh
 }
@@ -59,6 +60,18 @@ function check_config_file {
     echo
     exit 1
   fi
+
+  if [ "x$ADMIN_USERNAME" = "x" ] || [ "x$ADMIN_PASSWORD" = "x" ] || [ "x$ADMIN_EMAIL" = "x" ] || [ "x$MYSQL_DB_NAME" = "x" ] || [ "x$MYSQL_USERNAME" = "x"]; then
+    echo
+    echo -e  "${BGRED}                                                                    ${RESTORE}"
+    echo -e "${BGLRED}  ERROR: Required settings not found.                               ${RESTORE}"
+    echo -e  "${BGRED}  > Check if you have entered all the required values in ${BGLRED}config.sh${BGRED}  ${RESTORE}"
+    echo -e  "${BGRED}    file present in same folder as that of the ${BGLRED}install${BGRED} script.      ${RESTORE}"
+    echo -e  "${BGRED}                                                                    ${RESTORE}"
+    echo
+    exit 1
+  fi
+
 }
 
 
@@ -184,9 +197,9 @@ function install_drupal_profile {
     --uri=$BASE_DOMAIN_URL
   echo
 
-  echo -e "${LBLUE}> Disable the update module as it slows down admin access${RESTORE}"
-  drush -y dis update
-  echo
+#  echo -e "${LBLUE}> Disable the update module as it slows down admin access${RESTORE}"
+#  drush -y dis update
+#  echo
 
   cd $ROOT
 }
@@ -216,7 +229,7 @@ function create_sites_default_files_directory {
 function enable_development_modules {
   echo -e "${LBLUE}> Enabling the development modules${RESTORE}"
   cd $ROOT/www
-  drush en -y devel views_ui field_ui context_ui
+  drush en -y devel views_ui field_ui context_ui ckeditor eazylaunch
   cd $ROOT
   echo
 }

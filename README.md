@@ -18,7 +18,9 @@ Copy the example configuration file to config.sh:
 
 	$ cp default.config.sh config.sh
 
-Edit the configuration file, fill in the blanks.
+Create a database that can be used for this instance.
+Edit the configuration file, fill in the Database credentials and other
+pertinenet details.
 
 
 #### Run the install script
@@ -99,3 +101,11 @@ when you run the upgrade script.
 6. Makes a symlink within the /www/profiles directory to the
    /skeleton 7. directory.
 7. Restore the backup of the sites/default folder.
+
+#### Debugging
+PHP Fatal error:  Unsupported operand types in ~/.composer/vendor/drush/drush/includes/sitealias.inc on line 1507
+Drush command terminated abnormally due to an unrecoverable error.                                                                   [error]
+Error: Unsupported operand types in ~/.composer/vendor/drush/drush/includes/sitealias.inc,
+
+If you are facing the above error more often than not it could mean that you have not entered the Database credentials after copying the 
+default.config.sh file and renaming it to config.sh
