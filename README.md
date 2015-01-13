@@ -18,7 +18,9 @@ Copy the example configuration file to config.sh:
 
 	$ cp default.config.sh config.sh
 
-Edit the configuration file, fill in the blanks.
+Create a database that can be used for this instance.
+Edit the configuration file, fill in the Database credentials and other
+pertinenet details.
 
 
 #### Run the install script
