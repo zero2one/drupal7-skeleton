@@ -197,9 +197,9 @@ function install_drupal_profile {
     --uri=$BASE_DOMAIN_URL
   echo
 
-  echo -e "${LBLUE}> Disable the update module as it slows down admin access${RESTORE}"
-  drush -y dis update
-  echo
+#  echo -e "${LBLUE}> Disable the update module as it slows down admin access${RESTORE}"
+#  drush -y dis update
+#  echo
 
   cd $ROOT
 }
