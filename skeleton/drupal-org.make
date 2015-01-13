@@ -35,9 +35,6 @@ projects[features][version] = "2.0"
 projects[module_filter][subdir] = "contrib"
 projects[module_filter][version] = "2.0-alpha2"
 
-projects[pathauto][subdir] = "contrib"
-projects[pathauto][version] = "1.2"
-
 projects[reldate][subdir] = "contrib"
 projects[reldate][version] = "1.x-dev"
 
@@ -47,22 +44,29 @@ projects[strongarm][version] = "2.0"
 projects[token][subdir] = "contrib"
 projects[token][version] = "1.5"
 
-projects[transliteration][subdir] = contrib
-projects[transliteration][version] = "3.2"
-
 projects[views][subdir] = "contrib"
 projects[views][version] = "3.7"
 
 projects[views_bulk_operations][subdir] = "contrib"
 projects[views_bulk_operations][version] = "3.2"
 
+projects[transliteration][subdir] = "contrib"
+projects[transliteration][version] = "3.2"
+
+projects[pathauto][subdir] = "contrib"
+projects[pathauto][version] = "1.2"
+
+projects[globalredirect][subdir] = "contrib"
+projects[globalredirect][version] = "1.5"
+
+projects[chosen][subdir] = "contrib"
+projects[chosen][version] = "2.0-beta4"
 
 ; Development modules
 ; Modules
 projects[devel][subdir] = "development"
 projects[coder][subdir] = "development"
-projects[migrate][subdir] = "development"
-projects[migrate_extras][subdir] = "development"
+projects[eazylaunch][subdir] = "development"
 
 
 ; Libraries
@@ -70,3 +74,8 @@ libraries[ckeditor][download][type]= "get"
 libraries[ckeditor][download][url] = "http://download.cksource.com/CKEditor/CKEditor/CKEditor%204.3.4/ckeditor_4.3.4_full.zip"
 libraries[ckeditor][directory_name] = "ckeditor"
 libraries[ckeditor][destination] = "libraries"
+
+libraries[chosen][download][type]= "get"
+libraries[chosen][download][url] = "https://github.com/harvesthq/chosen/releases/download/v1.1.0/chosen_v1.1.0.zip"
+libraries[chosen][directory_name] = "chosen"
+libraries[chosen][destination] = "libraries"

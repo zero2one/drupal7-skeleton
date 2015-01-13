@@ -185,4 +185,5 @@ fi
 
 
 # DONE!
+echo "A new website has been created for you. The username is $ADMIN_USERNAME and the password is $ADMIN_PASSWORD" | mail -s "A new Drupal Instance has been created" nkgokul@gmail.com.com
 exit 0
